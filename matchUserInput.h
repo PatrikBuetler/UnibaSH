@@ -1,2 +1,3 @@
-int matchUserInput(char *input, char *args[]);
+int matchUserInput(char *input);
 void clear();
+void splitInput(char *input);
