@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "matchUserInput.h"
+#include "FilesystemChecks.h"
 
 // To compile use: make
 // To run use: ./main
@@ -14,6 +15,7 @@ int main() {
     // First time setup
     
     char pathname, input[101];
+    checkAndCreatePath("UnibaSH");
     clear();
     
     // Main while loop
