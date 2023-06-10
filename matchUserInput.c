@@ -1,6 +1,6 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 #include <stddef.h>
 #include <unistd.h>
 #include <dirent.h>	
@@ -31,7 +31,17 @@ int matchUserInput(char *input) {
         // TODO
     }
     if(!strcmp(input, "test") || !strcmp(input, "login()")) {
-        checkAndCreateSecondLayerFolder(year);
+        char *home = getDownloadPath();
+        //printf("%s\n", home);
+        
+        free(home);
+        return 1;
+    }
+    if(!strcmp(input, "test2") || !strcmp(input, "login()")) {
+        char *test = constructFilepath(lecture, year, lorh);
+        //printf("%s\n", home);
+        
+        free(test);
         return 1;
     }
     if(!strcmp(input, "quit") || !strcmp(input, "quit()") || !strcmp(input, "exit") || !strcmp(input, "exit()")) {
@@ -44,15 +54,16 @@ int matchUserInput(char *input) {
         splitInput(temp);
         //printf("%s %s %s %s\n", arg1, arg2, arg3, arg4);
         // Get the name of the newly downloaded file
-        char* name = extractFilenameFromAlias(lecture, lorh, number, year);
+        char name = extractFilenameFromAlias(lecture, lorh, number, year);
         printf("A document has been located, moving it to the corresponding folder..\n");
         checkAndCreateSecondLayerFolder(year);
         checkAndCreateThirdLayerFolder(lecture, year);
-        char[] path = checkAndCreateFourthLayerFolder(lorh, lecture, year);
+        char *path = checkAndCreateFourthLayerFolder(lorh, lecture, year);
         // Check if we have this file already in our structure, copy it over if not
-        
+        printf("%s\n", path);
         //THIS IS NEW NOT IMPLEMENTED OR TESTED
-        moveFileToLayerFolder(char path, char name);
+        //moveFileToLayerFolder(char path, char name);
+        free(path);
         return 1;
     }
 

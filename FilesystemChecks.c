@@ -1,6 +1,6 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
 #include <sys/stat.h>
@@ -8,6 +8,7 @@
 #include <errno.h>
 #include <dirent.h>
 #include "matchUserInput.h"
+#include <pwd.h>
 
 void moveFileToLayerFolder(char folder, char name);
 int checkIfFolderExists(char* value) {
@@ -268,16 +269,46 @@ char* checkAndCreateFourthLayerFolder(char *lorh, char *lecture, char *year) {
     else {
         strcat(path, "Lecture");
     }
-    printf("%s\n", path);
+    //printf("%s\n", path);
     checkAndCreatePath(path);
-    return path;
+    char *ret = malloc(50*sizeof(char));
+    strcpy(ret, path);
+    return ret;
 }
 void moveFileToLayerFolder(char folder, char name){
 
 }
-char* constructFilepath(char *lecture, char *year, char *lorh, char) {
+char* constructFilepath(char *lecture, char *year, char *lorh) {
+    char path[50] = "UnibaSH/";
+    strcat(path, year);
+    strcat(path,"/");
+    strcat(path, lecture);
+    strcat(path, "/");
+    if (!strcmp(lorh, "h")) {
+        strcat(path, "Homework");
+    }
+    else {
+        strcat(path, "Lecture");
+    }
+    //printf("%s\n", path);
+    //checkAndCreatePath(path);
+    char *ret = malloc(50* sizeof(char)); 
+    strcpy(ret, path);
+    return ret;
 }
+char* getDownloadPath() {
+    const char *home;
+     if((home = getenv("HOME")) == NULL) {
+         //home = getpwuid(getuid())->pw_dir;
+     }
+     
+    char *homepath = malloc(30*sizeof(char));
+    strcat(homepath, home);
+    strcat(homepath, "/Downloads");
 
+    //printf("%s\n", homepath);
+    return homepath;
+}
 
 
 
